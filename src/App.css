@@ -22,3 +22,7 @@
 .menu h1 {
   font-family: monospace;
 }
+
+.grid {
+  margin: 100px 0 0;
+}
