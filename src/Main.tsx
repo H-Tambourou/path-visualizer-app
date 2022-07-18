@@ -30,6 +30,17 @@ const getInitialGrid = () => {
   return grid;
 }
 
+const getNewGridWithWallToggled = (grid : any, row : number, col : number) => {
+  const newGrid = grid.slice();
+  const node = newGrid[row][col];
+  const newNode = {
+    ...node,
+    isWall: !node.isWall
+  };
+  newGrid[row][col] = newNode;
+  return newGrid;
+};
+
 const createNode = (col : number, row : number) => {
   return {
     col,
@@ -45,6 +56,23 @@ const createNode = (col : number, row : number) => {
 
 const Main = () => {
   const [grid, setGrid] = useState<any>(getInitialGrid());
+  const [mouseIsPressed, setMouseIsPressed] = useState<boolean>(false);
+
+  const handleMouseDown = (row : number, col : number) => {
+    const newGrid = getNewGridWithWallToggled(grid, row, col);
+    setGrid(newGrid);
+    setMouseIsPressed(true);
+  }
+
+  const handleMouseEnter = (row : number, col : number) => {
+    if (!mouseIsPressed) return;
+    const newGrid = getNewGridWithWallToggled(grid, row, col);
+    setGrid(newGrid);
+  }
+
+  const handleMouseUp = () => {
+    setMouseIsPressed(false);
+  }
 
   return(
     <div className="Main">
@@ -60,6 +88,11 @@ const Main = () => {
                 isBegining={isBegining}
                 isEnd={isEnd}
                 isWall={isWall}
+                onMouseDown={(row : number, col : number) => handleMouseDown(row, col)}
+                onMouseEnter={(row : number, col : number) =>
+                  handleMouseEnter(row, col)
+                }
+                onMouseUp={() => handleMouseUp()}
               />
             )
           })}
