@@ -1,16 +1,16 @@
 interface NodeProps {
-  key: number;
   col: number;
   row: number;
   isBegining: boolean;
   isEnd: boolean;
   isWall: boolean;
+  mouseIsPressed: boolean;
   onMouseDown: (row : number, col : number) => void;
   onMouseEnter: (row : number, col : number) => void;
   onMouseUp: () => void;
 };
 
-const Node = ({ key, col, row, isBegining, isEnd, isWall, onMouseDown, onMouseEnter, onMouseUp }:NodeProps) => {
+const Node = ({ col, row, isBegining, isEnd, isWall, mouseIsPressed, onMouseDown, onMouseEnter, onMouseUp }:NodeProps) => {
   const status = isEnd
     ? "node-end"
     : isBegining
@@ -23,8 +23,8 @@ const Node = ({ key, col, row, isBegining, isEnd, isWall, onMouseDown, onMouseEn
     <div
       id={`node-${row}-${col}`}
       className={`node ${status}`}
-      onMouseDown={() => onMouseDown}
-      onMouseEnter={() => onMouseEnter}
+      onMouseDown={() => onMouseDown(row, col)}
+      onMouseEnter={() => onMouseEnter(row, col)}
       onMouseUp={() => onMouseUp}
     />
   )
