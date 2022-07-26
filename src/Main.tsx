@@ -101,11 +101,9 @@ const Main = () => {
   };
 
   const clearPath = () => {
-    setGrid([]);
     const newGrid = getInitialGrid();
     setGrid(newGrid);
   };
-  console.log(grid)
 
   return(
     <div className="Main">
