@@ -14,7 +14,7 @@ const getInitialGrid = () => {
   const grid = [];
   for(let row = 0; row < 20; row++){
     const currentRow = [];
-    for(let col = 0; col < 40; col++) {
+    for(let col = 0; col < 42; col++) {
       currentRow.push(createNode(col, row));
     }
     grid.push(currentRow);
@@ -49,11 +49,12 @@ const createNode = (col : number, row : number) => {
 const Main = () => {
   const [grid, setGrid] = useState<any>(getInitialGrid());
   const [mouseIsPressed, setMouseIsPressed] = useState<boolean>(false);
+  const time = Date.now(); //without adding this to row id, react doesnt recreate the the elements
 
   const handleMouseDown = (row : number, col : number) => {
     const newGrid = getNewGridWithWallToggled(grid, row, col);
     setGrid(newGrid);
-    setMouseIsPressed(true);
+    setMouseIsPressed(!mouseIsPressed);
   };
 
   const handleMouseEnter = (row : number, col : number) => {
@@ -63,7 +64,7 @@ const Main = () => {
   };
 
   const handleMouseUp = () => {
-    setMouseIsPressed(false);
+    setMouseIsPressed(!mouseIsPressed);
   };
 
   const animateDijkstra = (visitedNodesInOrder : any, nodesInShortestPathOrder : NodeProps[]) => {
@@ -101,8 +102,7 @@ const Main = () => {
   };
 
   const clearPath = () => {
-    const newGrid = getInitialGrid();
-    setGrid(newGrid);
+    setGrid(getInitialGrid());
   };
 
   return(
@@ -111,10 +111,11 @@ const Main = () => {
           Visualize={visualizeDijkstra}
           Clear={clearPath}
         />
+        <div className='graph'>
         <div className='grid'>
           {grid.map((row : NodeProps[], rowId : number) => {
             return (
-              <div key={rowId}>
+              <div key={rowId + time}>
                 {row.map((node : NodeProps, nodeId : number) => {
                   const { col, row, isEnd, isBegining, isWall } = node;
                   return (
@@ -135,6 +136,7 @@ const Main = () => {
               </div>
             )
           })}
+        </div>
         </div>
     </div>
   )

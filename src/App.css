@@ -16,7 +16,7 @@
 
 .menu {
   width: 100%;
-  height: 50px;
+  height: 70px;
   border-bottom: 1px solid black;
   display: flex;
   align-items: center;
@@ -28,19 +28,25 @@
 }
 
 .menu button {
-  height: 100%;
-  color: black;
   font-family: monospace;
-  width: 80px;
+  width: 90px;
+  background-color: lightcyan;
+  border-radius: 25px;
+  padding: 5px;
 }
 
 .menu button:hover {
   background-color: aqua;
 }
 
+.graph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:calc(100% - 70px);
+}
+
 .grid {
-  margin: auto;
-  width: 85%;
   background-color: #020404;
 }
 
@@ -79,17 +85,17 @@
 @keyframes visitedAnimation {
   0% {
     transform: scale(0.3);
-    background-color: rgba(0, 0, 66, 0.75);
+    background-color:  purple;
     border-radius: 100%;
   }
 
   50% {
-    background-color: rgba(195, 78, 206, 0.75);
+    background-color: cyan;
   }
 
   75% {
     transform: scale(1.2);
-    background-color: rgba(0, 217, 159, 0.75);
+    background-color: lightcyan;
   }
 
   100% {
