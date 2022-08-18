@@ -6,4 +6,4 @@ A react application for a path visualizer using Dijkstra's algorithm.
 
 ## Built with
 
-- Typescript
+- React typescript
